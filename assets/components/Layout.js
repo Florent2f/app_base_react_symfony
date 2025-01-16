@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux'
 import Navbar from './Navbar';
+import Header from './Header';
 import * as app_actions from '../actions/app/app'
 import store from '../store'
 
@@ -21,6 +22,7 @@ const Layout = (props) => {
 
     return(
         <Fragment>
+            <Header />
             <Navbar />
             {props.children}
         </Fragment>
