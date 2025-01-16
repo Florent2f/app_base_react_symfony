@@ -1,10 +1,31 @@
-import './bootstrap.js';
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
-import './styles/app.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux'
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+import Layout from './components/Layout';
+import Home from './containers/Home';
+import SignUp from './containers/SignUp';
+import SignIn from './containers/SignIn';
+import NoPage from './containers/NoPage';
+import store from './store';
+
+const App = () => {
+
+    return(
+        <Provider store={store}>
+            <Router>
+                <Layout>
+                    <Routes>
+                        <Route exact path="/" element={<Home/>}/>
+                        <Route exact path="signup" element={<SignUp/>}/>
+                        <Route exact path="signin" element={<SignIn/>}/>
+                        <Route path="*" element={<NoPage />} />
+                    </Routes>
+                </Layout>
+            </Router>
+        </Provider>
+        
+    )
+}
+
+export default App;
