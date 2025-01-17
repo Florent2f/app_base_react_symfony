@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import './styles/Security.scss'
 import {localDomaine} from '../env'
 
 const SignUp = () => {
 
+    const navigate = useNavigate();
     const [name, setName] = useState('Florent');
     const [login, setLogin] = useState('login@gmail.com');
     const [password, setPassword] = useState('password1');
@@ -16,19 +17,17 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const payload = {login: login, password: password}
+        const payload = {name: name, login: login, password: password}
         await axios({url: localDomaine + '/security/registration', method: 'post', data: payload})
             .then(response => {
                 console.log(response.data.user_created);
                 console.log('user created');
+                navigate('/signin');
             })
             .catch(error => {
                 console.log(error);
                 console.log('user not created');
             })
-        
-        console.log('ok');
-        
     }
 
     const handleName = () => {
@@ -47,7 +46,7 @@ const SignUp = () => {
 
         <Fragment>
             <div className='container_react'>
-                <div className='signform'>
+                <div className='signform' style={{height:'280px'}}>
                     <h1>Sign Up</h1>
 
                     <form onSubmit={handleSubmit}>
