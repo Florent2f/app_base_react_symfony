@@ -1,18 +1,28 @@
 import React from 'react';
+import {Link,useNavigate} from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
-const options = [
-  'Show some love to MUI',
-  'Show all notification content',
-  'Hide sensitive notification content',
-  'Hide all notification content',
+const configurationsOptions = [
+  'Utilisateurs',
+  'Administration',
+  'Produits'
 ];
 
+const navConfigurations = {
+  0: '/admin/users',
+  1: '/',
+  2: '/',
+};
+
+
 const Navbar = () => {
+
+  
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const open = Boolean(anchorEl);
@@ -23,6 +33,7 @@ const Navbar = () => {
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
     setAnchorEl(null);
+    navigate(navConfigurations[index]);
   };
 
   const handleClose = () => {
@@ -32,34 +43,16 @@ const Navbar = () => {
   return (
     <div>
       <List component="nav" aria-label="Device settings" sx={{ bgcolor: '#FFFFFF' }} style={{ padding:0, margin: 0 }}>
-        <ListItemButton
-          id="lock-button"
-          aria-haspopup="listbox"
-          aria-controls="lock-menu"
-          aria-label="when device is locked"
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClickListItem}
+        <ListItemButton 
+          id="lock-button" aria-label="Configuration" aria-expanded={open ? 'true' : undefined} onClick={handleClickListItem} 
+          aria-haspopup="listbox" aria-controls="lock-menu"
         >
-          <ListItemText
-            primary="When device is locked"
-            secondary={options[selectedIndex]}
-          />
+          <ListItemText primary="Configuration" secondary={configurationsOptions[selectedIndex]} />
         </ListItemButton>
       </List>
-      <Menu
-        id="lock-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{'aria-labelledby': 'lock-button',role: 'listbox'}}
-      >
-        {options.map((option, index) => (
-          <MenuItem
-            key={option}
-            // disabled={index === 0}
-            selected={index === selectedIndex}
-            onClick={(event) => handleMenuItemClick(event, index)}
-          >
+      <Menu id="lock-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{'aria-labelledby': 'lock-button',role: 'listbox'}} >
+        {configurationsOptions.map((option, index) => (
+          <MenuItem key={option} selected={index === selectedIndex} onClick={(event) => handleMenuItemClick(event, index)}>
             {option}
           </MenuItem>
         ))}
