@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controller\Configuration;
+namespace App\Controller\Configuration\Users;
 
-use App\Entity\Admin\EnseigneApp;
-use App\Entity\Admin\UserApp;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Configuration\Users\UserApp;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Configuration\Users\EnseigneApp;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

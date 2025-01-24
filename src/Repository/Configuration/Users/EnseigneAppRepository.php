@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\Admin;
+namespace App\Repository\Configuration\Users;
 
-use App\Entity\Admin\EnseigneApp;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Configuration\Users\EnseigneApp;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**

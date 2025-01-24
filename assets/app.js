@@ -7,7 +7,7 @@ import Home from './containers/Home';
 import SignUp from './containers/SignUp';
 import SignIn from './containers/SignIn';
 import NoPage from './containers/NoPage';
-import AdminUsers from './containers/configuration/AdminUsers';
+import AdminUsers from './containers/configuration/users/AdminUsers';
 import store from './store';
 
 const App = () => {

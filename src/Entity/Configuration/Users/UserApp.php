@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Entity\Admin;
+namespace App\Entity\Configuration\Users;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\Admin\UserAppRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\Configuration\Users\UserAppRepository;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserAppRepository::class)]

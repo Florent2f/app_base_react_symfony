@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Entity\Admin;
+namespace App\Entity\Configuration\Users;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-use App\Repository\Admin\EnseigneAppRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Repository\Configuration\Users\EnseigneAppRepository;
 
 #[ORM\Entity(repositoryClass: EnseigneAppRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_ENSEIGNE', fields: ['enseigne'])]

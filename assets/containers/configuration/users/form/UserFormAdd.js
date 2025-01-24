@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import FormControl from '@mui/material/FormControl';
-import Modal from '../../../components/ui/modal/Modal';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
@@ -15,13 +14,8 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-
+import Modal from '../../../../components/ui/modal/Modal';
 import {user_create} from '../actions/adminUsers'
-import { useDispatch } from 'react-redux';
-import {localDomaine} from '../../../env'
-import axios from "axios";
-
-import {USER_CREATE_START, USER_CREATE_SUCESS, USER_CREATE_FAILED} from '../actions/adminUsersTypes';
 
 const enseignesList = [{id: 1, enseigne: 'Enseigne 1', selected: false}, {id: 2, enseigne: 'Enseigne 2', selected: false}]
 const userObj = {name: '', email: '', password: '', confirmPassword: ''};
@@ -35,32 +29,19 @@ const UserFormAdd = (props) => {
     const [role, setRole] = useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
 
-    const dispatch = useDispatch();
-
     const handleSubmitAdd = (e) => {
         e.preventDefault();
         const data = {user: user, enseignes: enseignes, role: role};
-
         // const userCreated = useCallback(() => dispatch(user_create(data)),[dispatch]);
-        const url = localDomaine + '/admin/users/add';
-        dispatch({type: USER_CREATE_START})
-        axios({url: url, method: 'post', data: data})
-            .then((response) => {
-                dispatch({
-                    type: USER_CREATE_SUCESS,
-                    data: response.data.newUser
-                })
-                updateTableUsers(response.data.newUser)
+        user_create(data).then(reponse => {
+            if(reponse.newUser){
+                updateTableUsers(reponse.newUser)
                 resetForm();
                 setShow(false);
-            })
-            .catch((error) => {
-                dispatch({
-                    type: USER_CREATE_FAILED,
-                    error: 'Une erreur est servenue.'
-                })
+            } else {
                 setErrorMessage('Une erreur est servenue.')
-            })
+            }
+        });
     };
 
     const handleClose = () => {

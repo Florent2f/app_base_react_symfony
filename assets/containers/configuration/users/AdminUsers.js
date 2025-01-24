@@ -13,9 +13,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import UserFormAdd from './components/UserFormAdd'
+import UserFormAdd from './form/UserFormAdd'
 import Chip from '@mui/material/Chip';
-import {localDomaine} from '../../env'
+import {localDomaine} from '../../../env'
 
 const AdminUsers = () => {
 
