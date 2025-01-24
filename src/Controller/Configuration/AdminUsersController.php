@@ -76,4 +76,14 @@ class AdminUsersController extends AbstractController
 
         return $this->json(['newUser' => $newUser]);
     }
+
+    #[Route('/admin/users/remove', name: 'admin.users.remove')]
+    public function adminUserRemove(Request $request, EntityManagerInterface $em): Response
+    {
+        $id = json_decode($request->getContent());
+        $em->remove($em->getReference(UserApp::class, $id));
+        $em->flush();
+        return $this->json(['userRemoved' => true]);
+    }
+
 }

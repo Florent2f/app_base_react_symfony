@@ -46,7 +46,19 @@ const AdminUsers = () => {
   const updateTableUsers = (props) => {
     setUsers([...users, props])
   }
-  
+
+  const handleDeleteUser = (id) => {
+    const url = localDomaine + '/admin/users/remove';
+    axios({url: url, method: 'post', data: id})
+      .then(res => {
+        if(res.data.userRemoved){
+          let majUsers = [...users];
+          majUsers = majUsers.filter(user => user.id !=id)
+          setUsers(majUsers);
+        }
+      })
+      .catch(console.log('error remove user.'))
+  }
 
   return (
 
@@ -84,7 +96,8 @@ const AdminUsers = () => {
                 <TableCell component="th" scope="row">{row.id}</TableCell>
                 <TableCell align="right">{row.name}</TableCell>
                 <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="center">
+                <TableCell align="left">
+                    <Box sx={{ width: 300, display: 'inline-block' }}></Box>
                     {row.enseigne.map(e => {
                       return(<Chip key={e.id} label={e.enseignes} color='primary' style={{marginLeft: 10}} />);
                     })}
@@ -96,9 +109,9 @@ const AdminUsers = () => {
                       <EditIcon />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title="Delete" style={{ color: '#576065' }}>
+                  <Tooltip  title="Delete" onClick={()=>{handleDeleteUser(row.id)}} style={{ color: '#576065' }}>
                     <IconButton>
-                      <DeleteIcon />
+                      <DeleteIcon/>
                     </IconButton>
                   </Tooltip>
                 </TableCell>
